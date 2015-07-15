@@ -10,21 +10,6 @@ Author URI: http://www.blueliquiddesigns.com.au / http://www.industriousmouse.co
 
 ------------------------------------------------------------------------
 
-Partial re-write July 2015 by Industrious Mouse.
-
-Files Modified:
-
-— /gravity-forms-dropbox-uploader/dropbox.php
-
-Updates:
-
-— Caters for Multi-File Uploads
-— Updates the Lead/Entry Meta data with the Dropbox URL
-— Adds a hook on the replace_macros function (gform_dropbox_replace_path)
-  to allow for custom macros/folder paths
-
---
-
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or

@@ -1,34 +1,34 @@
-=== Plugin Name ===
-Contributors: blueliquiddesigns, usableweb, industriousmouse
-Donate link: http://www.blueliquiddesigns.com.au/index.php/gravity-forms-dropbox-uploader/
-Tags: gravity, forms, dropbox, automation, upload
-Requires at least: 3.0
-Tested up to: 4.2
-Stable tag: 1.1
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+# Gravity Forms Dropbox Uploader #
 
-The Gravity Forms Dropbox Uploader is a simple, intuitive plugin that allows you to store Gravity Form uploads in your Dropbox account.
+## 1.1 Updates (July 2015) ##
 
-== Description ==
+Original Development by [Blue Liquid Designs](http://www.blueliquiddesigns.com.au).  
+Partial re-write July 2015 by [Industrious Mouse](http://www.industriousmouse.co.uk).
+
+## Support ##
+
+The plugin is no longer under active development. If you would like to take over this project please contact enquire@blueliquiddesigns.com.au.
+  
+The repository/plugin will not be maintained by Industrious Mouse, we've just added the updates to help anyone out with some issues listed in the changelog below.
+
+* * *
+
+## Description ##
 The Gravity Forms Dropbox Uploader is a simple, intuitive plugin that integrates seamlessly into Gravity Forms and allows you to store Gravity Form uploads in your Dropbox account.
 
-= Features =
+## Features ##
 *    Gravity Form Uploads are saved to your authenticated Dropbox account
 *    Intuitive user interface allows you to select what fields will upload to Dropbox
 *    Quick set up time - you're uploading in a couple of minutes
 *    Option to delete files automatically from server after uploading to Dropbox
 
-= Tutorial =
+## Tutorial ##
 [Head to Blue Liquid Designs](http://www.blueliquiddesigns.com.au/index.php/gravity-forms-dropbox-uploader/) - the developer of the extended Gravity Forms Dropbox Uploader plugin - and view everything you need to know about installing, configuring and using the plugin.
 
-= Support =
-The plugin is no longer under active development. If you would like to take over this project please contact us on enquire@blueliquiddesigns.com.au.
+## Haven't purchased Gravity Forms yet? ##
+Head over to [Gravity Forms' official website](https://www.e-junkie.com/ecom/gb.php?cl#54585&c#ib&aff#235154) and purchase a copy.
 
-= Haven't purchased Gravity Forms yet? =
-Head over to [Gravity Forms' official website](https://www.e-junkie.com/ecom/gb.php?cl=54585&c=ib&aff=235154) and purchase a copy.
-
-== Installation ==
+## Installation ##
 
 1. Install and activate plugin on WordPress
 2. Go to the Gravity Forms Settings section in the admin area and then navigate to the Dropbox settings page.
@@ -39,7 +39,7 @@ Head over to [Gravity Forms' official website](https://www.e-junkie.com/ecom/gb.
 7. Go to the Gravity Forms' Edit page, add an upload box and check the Upload file to your Dropbox account Checkbox under the File Upload's Properties tab. Save the form.
 8. When you submit the live form the file will be automatically placed in your Dropbox folder.
 
-== Frequently Asked Questions ==
+## Frequently Asked Questions ##
 
 **Is the plugin still supported?**
 Unfortunately no. Due to time constraints and changes in the Dropbox API - the core API integration system used in the plugin needs to be upgraded - we are no longer supporting this plugin. If you would like to take over this project please contact us on enquire@blueliquiddesigns.com.au.
@@ -48,44 +48,58 @@ Unfortunately no. Due to time constraints and changes in the Dropbox API - the c
 Yes. As of version 1.0.8 you now have the option to delete files off the server once they have been uploaded to Dropbox.
 
 **How do you save the files in it's own directory in wordpress?**
-As of version 1.0.4 you can use macros in the file path. Macros include #username#, #date#, #time# and #uniqueid#. Go to the Dropbox settings page and enter a path like the following in the *Dropbox Upload Directory* field.
+As of version 1.0.4 you can use macros in the file path. Macros include #username#, #date#, #time# and #uniqueid#. Go to the Dropbox settings page and enter a path like the following in the *Dropbox Upload Directory* field.  
 
-== Screenshots ==
+Hook/Filter Example — Allows custom folder outside of the current macros listed above:
+ 
+	add_filter('gform_dropbox_replace_path', function($path, $id){
+	
+	   $entry = \GFAPI::get_entry($id);
+	
+	   if($location_field = $entry[4])
+	   {
+	       $path = str_replace('#location#', $location_field, $path);
+	   }
+	
+	   return $path;
+	
+	}, 10, 2);
 
-1. Create a new App and ensure you leave the Access Level on App Folder.
-2. Copy the App Key and App Secret to the Wordpress GF Dropbox Settings page.
-3. Authenticate your Dropbox Account.
-4. Edit a form and tell the system you want that file uploaded to Dropbox.
+## Changelog ##
 
-== Changelog ==
+### 1.1 ###
 
-= 1.0.9 =
+*    Caters for Multi-File Uploads
+*    Updates the Lead/Entry Meta data with the Dropbox URL
+*    Adds a hook on the replace_macros function (gform_dropbox_replace_path) to allow for custom macros/folder paths
+
+### 1.0.9 ###
 * Bug: Fixed problem with the last update which stopped the global Dropbox upload path from working when the override path hadn't been set by the user.
 
-= 1.0.8 =
+### 1.0.8 ###
 * Feature: Added the ability to remove files from your server after they have been placed in your Dropbox
 * Feature: Individual upload boxes can now be saved into different locations using an 'override' box
 
-= 1.0.7 =
+### 1.0.7 ###
 * Bug: Fixed problem uploading files with non-ascii characters. Non ascii characters will be removed. If entire file name is removed an md5 hash will be generated. 
 
-= 1.0.5 =
+### 1.0.5 ###
 * Bug: Fixed class conflict. Dropbox-api autoloader was being called twice.
 
-= 1.0.4 =
+### 1.0.4 ###
 * Bug: Fixed a few variable typos that were giving warnings
 * Bug: Used CURL class when linking Dropbox accounts. Was throwing errors for some users
 * Bug: Fix problem were some files were not being uploaded. Boolean error.
 
-= 1.0.3 =
+### 1.0.3 ###
 * Bug: Fixed problem with compatability with some Linux servers
 
-= 1.0.2 =
+### 1.0.2 ###
 * Bug: Fixed (hopefully) issue when Wordpress is installed in another directory. 
 
-= 1.0.1 =
+### 1.0.1 ###
 * Security Risk: Left debugging information displaying in first release. Turned off now.
 * Bug: Changed the way we call our admin style sheet. Now use wp_enqueue_style();
 
-= 1.0.0 =
+### 1.0.0 ###
 * First release. 

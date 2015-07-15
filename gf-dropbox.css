@@ -1,0 +1,12 @@
+#gf-dropbox label {
+float: left;
+width: 200px;
+}
+
+#gf-dropbox .input {
+width: 250px;	
+}
+
+#gf-dropbox ol li {
+list-style: decimal;	
+}

@@ -29,10 +29,19 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 add_action('init',  array('GFdropbox', 'init'));
 add_action('admin_init',  array('GFdropbox', 'admin_init'));
 
+/**
+ *
+ */
 define("GF_DROPBOX_SETTINGS_URL", site_url() .'/wp-admin/admin.php?page=gf_settings&addon=Dropbox');
 
+/**
+ * Class GFdropbox
+ */
 class GFdropbox {
 
+	/**
+	 * @var
+     */
 	static $dropbox;
 
 	/**
@@ -44,9 +53,12 @@ class GFdropbox {
 		if(!self::check_gf_install())
 			return;
 
-		add_action('gform_after_submission', array('GFdropbox', 'set_post_content'), 10, 2);
+		add_filter('gform_entry_post_save', array('GFdropbox', 'set_post_content'), 10, 2);
 	}
 
+	/**
+	 *
+     */
 	static public function admin_init() {
 
 		/* check Gravity Forms is installed */
@@ -67,6 +79,9 @@ class GFdropbox {
 
 	}
 
+	/**
+	 *
+     */
 	private function admin_dropbox_uploader() {
 		/* initiate checkbox on fileuploader on forms page */
 		add_action("gform_field_standard_settings", array('GFdropbox', "my_advanced_settings"), 10, 2);
@@ -74,6 +89,9 @@ class GFdropbox {
 		add_filter('gform_tooltips', array('GFdropbox', 'add_dropbox_tooltips'));
 	}
 
+	/**
+	 * @return bool
+     */
 	private function check_gf_install() {
 		if(!class_exists("GFCommon")){
 			return false;
@@ -112,6 +130,9 @@ class GFdropbox {
 	}
 
 	/* check if we're on the settings page */
+	/**
+	 *
+     */
 	private function settings_page() {
 
 		if(RGForms::get("page") == "gf_settings" || rgget("oauth_token")){
@@ -146,6 +167,9 @@ class GFdropbox {
 
 
 	//Returns the url of the plugin's root folder
+	/**
+	 * @return string
+     */
 	protected function get_base_url(){
 		return plugins_url(null, __FILE__);
 	}
@@ -410,7 +434,13 @@ class GFdropbox {
 	 * Allows you to add macros to the Dropbox directory path
 	 * Marcos include: #login#, #date#, #time#, #uniqueid#
 	 */
-	public static function replace_macros($path, $id)
+	/**
+	 * @param $path
+	 * @param $id
+	 *
+	 * @return mixed|string|void
+     */
+    public static function replace_macros($path, $id)
 	{
 		global $current_user;
 		if(strlen($path) == 0) {
@@ -438,6 +468,10 @@ class GFdropbox {
 	/**
 	 * This method does the grunt work and actually uploads the file to the users Dropbox Folder
 	 *
+	 * @param $lead
+	 * @param $form
+	 * @return bool
+	 * @throws Dropbox_Exception
 	 */
 	public static function set_post_content($lead, $form)
 	{
@@ -571,6 +605,8 @@ class GFdropbox {
 			$headers[] = 'From: no-reply@'.site_url().' <no-reply@'. site_url() .'>';
 			wp_mail($to, $subject, $message, $headers);
 		}
+
+		return $lead;
 	}
 }
 

@@ -217,7 +217,7 @@ class GFdropbox {
 
 			<form action="" method="post">
 				<h3>
-					<?php esc_html_e( 'Dropbox Uploader Settings', 'gf-dropbox-uploader' ); ?>
+					<?php esc_html_e( 'Dropbox Uploader Settings', 'gravity-forms-dropbox-uploader' ); ?>
 				</h3>
 
 				<p>
@@ -405,7 +405,7 @@ class GFdropbox {
 		if ( -1 === $position ) :
 			?>
 			<li class="file_extensions_setting field_setting">
-				<strong><?php esc_html_e( 'Dropbox', 'gf-dropbox-uploader' ); ?></strong>
+				<strong><?php esc_html_e( 'Dropbox', 'gravity-forms-dropbox-uploader' ); ?></strong>
 				<label for="field_dropbox_value">
 					<input type="checkbox" id="field_dropbox_value" onclick="SetFieldProperty( 'dropboxField', this.checked );" />
 					Upload file to your Dropbox account?
@@ -416,7 +416,7 @@ class GFdropbox {
 					Override default path:
 					<input type="text" id="field_dropbox_path" value="<?php echo esc_attr( get_option( 'gf_dropbox_directory' ) ); ?>" onkeyup="SetFieldProperty( 'dropboxFieldPath', this.value );" size="40" />
 					<?php gform_tooltip( 'form_dropbox_new_path' ); ?>
-					<p><small><?php esc_html_e( '', 'gf-dropbox-uploader' ); ?></small></p>
+					<p><small><?php esc_html_e( '', 'gravity-forms-dropbox-uploader' ); ?></small></p>
 				</label>
 			</li>
 			<?php

@@ -496,6 +496,8 @@ class GFdropbox {
 		/* replace uniqueid macro */
 		$path = str_replace( '#uniqueid#', $id, $path );
 
+		$path = apply_filters( 'gravity-forms-dropbox-uploader/replace_path', $path, $id );
+
 		return $path;
 	}
 

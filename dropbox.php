@@ -7,7 +7,7 @@
  * Author URI:   http://www.blueliquiddesigns.com.au / http://www.industriousmouse.co.uk
  * Contributors: usableweb (http://wordpress.org/support/profile/usableweb) / Industrious Mouse https://github.com/industrious-mouse
  * Version:      1.1.1
- * Text Domain:
+ * Text Domain:  gravity-forms-dropbox-uploader
  *
  * @package GF_Dropbox_Uploader
  *
